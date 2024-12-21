@@ -191,7 +191,7 @@ This `README.md` provides clear instructions on setting up, building, and runnin
 
 
 
-## Terraform Configuration for EC2, RDS, Auto Scaling, and Monitoring
+## Infrastructure Configuration using Terraform for EC2, RDS, Auto Scaling, and Monitoring
 
 ### Overview
 
