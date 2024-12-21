@@ -1,9 +1,9 @@
-# microservices-task
+# Microservices Task
 
 Here’s a comprehensive `README.md` file for your project that outlines the steps taken to separate the code into backend and frontend and build the Docker images with Docker Compose.
 
 
-# Microservices Task
+## Task Objective
 
 This project demonstrates the separation of a codebase into backend and frontend services, containerization using Docker, and orchestration using Docker Compose.
 
