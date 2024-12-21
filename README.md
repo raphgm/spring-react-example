@@ -2,7 +2,7 @@
 
 Here’s a comprehensive `README.md` file for your project that outlines the steps taken to separate the code into backend and frontend and build the Docker images with Docker Compose.
 
-```markdown
+
 # Microservices Task
 
 This project demonstrates the separation of a codebase into backend and frontend services, containerization using Docker, and orchestration using Docker Compose.
@@ -18,7 +18,6 @@ This project demonstrates the separation of a codebase into backend and frontend
 - [Contributing](#contributing)
 - [License](#license)
 
----
 
 ## Overview
 
@@ -32,7 +31,6 @@ This repository contains:
 - A **frontend** service (e.g., a React-based UI).
 - Docker and Docker Compose configurations to simplify containerization and deployment.
 
----
 
 ## Project Structure
 
