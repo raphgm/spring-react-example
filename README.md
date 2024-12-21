@@ -1,11 +1,11 @@
 # Microservices Task
 
-This `README.md` outlines the steps taken to separate the code into backend and frontend and build the Docker images with Docker Compose.
+This repository contains solutions for two DevOps-focused assignments: a Java Spring Boot React Application and a .NET Application. The objective is to enhance these applications by implementing best practices in containerization, CI/CD pipelines, and cloud integration.  
 
 
-## Task Objective
+## First Task Objective
 
-This project demonstrates the separation of a codebase into backend and frontend services, containerization using Docker, and orchestration using Docker Compose.
+The first project demonstrates the separation of a codebase into backend and frontend services, containerization using Docker, and orchestration using Docker Compose.
 
 ## Table of Contents
 - [Overview](#overview)
@@ -16,7 +16,8 @@ This project demonstrates the separation of a codebase into backend and frontend
 - [Docker Compose](#docker-compose)
 - [Build and Run](#build-and-run)
 - [Contributing](#contributing)
-- [License](#license)
+- [Infrastructure configuration using Terraform]
+- [Dotnet Project]
 
 
 ## Overview
