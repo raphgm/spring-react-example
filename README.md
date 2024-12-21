@@ -16,9 +16,9 @@ The first project demonstrates the separation of a codebase into backend and fro
 - [Docker Compose](#docker-compose)
 - [Build and Run](#build-and-run)
 - [Contributing](#contributing)
-- [Infrastructure configuration using Terraform]
-- [Dotnet Project]
-
+- [Infrastructure-using-Terraform](#Infrastructure-using-Terraform)
+- [dotnet](#dotnet)
+  
 
 ## Overview
 
