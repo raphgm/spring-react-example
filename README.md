@@ -1,12 +1,209 @@
 # microservices-task
 
+Here’s a comprehensive `README.md` file for your project that outlines the steps taken to separate the code into backend and frontend and build the Docker images with Docker Compose.
 
+```markdown
+# Microservices Task
+
+This project demonstrates the separation of a codebase into backend and frontend services, containerization using Docker, and orchestration using Docker Compose.
+
+## Table of Contents
+- [Overview](#overview)
+- [Project Structure](#project-structure)
+- [Setup](#setup)
+- [Backend Service](#backend-service)
+- [Frontend Service](#frontend-service)
+- [Docker Compose](#docker-compose)
+- [Build and Run](#build-and-run)
+- [Contributing](#contributing)
+- [License](#license)
 
 ---
 
-# Terraform Configuration for EC2, RDS, Auto Scaling, and Monitoring
-
 ## Overview
+
+The **Microservices Task** project is designed to demonstrate:
+- The separation of backend and frontend components.
+- Building and deploying both services as Docker containers.
+- Using Docker Compose for service orchestration.
+
+This repository contains:
+- A **backend** service (e.g., a REST API built with Spring Boot).
+- A **frontend** service (e.g., a React-based UI).
+- Docker and Docker Compose configurations to simplify containerization and deployment.
+
+---
+
+## Project Structure
+
+The repository is structured as follows:
+
+```
+microservices-task/
+├── backend/
+│   ├── src/
+│   ├── Dockerfile
+│   └── pom.xml (or package.json for Node.js backend)
+├── frontend/
+│   ├── src/
+│   ├── Dockerfile
+│   └── package.json
+├── docker-compose.yml
+└── README.md
+```
+
+### Backend
+The backend directory contains the server-side application, responsible for business logic and API endpoints.
+
+### Frontend
+The frontend directory contains the client-side application that interacts with the backend API and provides the user interface.
+
+---
+
+## Setup
+
+Before running the application, ensure you have the following installed:
+- [Docker](https://www.docker.com/get-started)
+- [Docker Compose](https://docs.docker.com/compose/)
+
+---
+
+## Backend Service
+
+### Steps for Setting Up the Backend
+1. Navigate to the `backend` directory:
+   ```bash
+   cd backend
+   ```
+2. Build the backend application:
+   - If using Maven:
+     ```bash
+     mvn clean package
+     ```
+   - If using Node.js:
+     ```bash
+     npm install
+     ```
+
+### Dockerize the Backend
+1. Create a `Dockerfile` in the `backend` directory:
+   ```dockerfile
+   FROM openjdk:11-jdk-slim
+   WORKDIR /app
+   COPY target/*.jar app.jar
+   ENTRYPOINT ["java", "-jar", "app.jar"]
+   ```
+2. Build the backend Docker image:
+   ```bash
+   docker build -t backend-service .
+   ```
+
+---
+
+## Frontend Service
+
+### Steps for Setting Up the Frontend
+1. Navigate to the `frontend` directory:
+   ```bash
+   cd frontend
+   ```
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
+
+### Dockerize the Frontend
+1. Create a `Dockerfile` in the `frontend` directory:
+   ```dockerfile
+   FROM node:14
+   WORKDIR /app
+   COPY . .
+   RUN npm install
+   RUN npm run build
+   CMD ["npx", "serve", "-s", "build", "-l", "3000"]
+   ```
+2. Build the frontend Docker image:
+   ```bash
+   docker build -t frontend-service .
+   ```
+
+---
+
+## Docker Compose
+
+The `docker-compose.yml` file is used to define and orchestrate the backend and frontend services.
+
+### Example `docker-compose.yml`
+```yaml
+version: "3.8"
+services:
+  backend:
+    build:
+      context: ./backend
+    ports:
+      - "8080:8080"
+    environment:
+      - SPRING_PROFILES_ACTIVE=prod
+    depends_on:
+      - db
+
+  frontend:
+    build:
+      context: ./frontend
+    ports:
+      - "3000:3000"
+
+  db:
+    image: mysql:8.0
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: microservices
+      MYSQL_USER: user
+      MYSQL_PASSWORD: password
+    ports:
+      - "3306:3306"
+```
+
+---
+
+## Build and Run
+
+### Step 1: Build the Images
+Run the following command to build Docker images for both the backend and frontend:
+```bash
+docker-compose build
+```
+
+### Step 2: Start the Services
+Start all services using Docker Compose:
+```bash
+docker-compose up
+```
+
+### Step 3: Access the Application
+- **Frontend**: Navigate to `http://localhost:3000` in your browser.
+- **Backend**: Access the API at `http://localhost:8080`.
+
+---
+
+## Contributing
+
+Feel free to fork this repository and make your own contributions. Pull requests are welcome.
+
+---
+
+## License
+
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
+```
+
+This `README.md` provides clear instructions on setting up, building, and running your backend and frontend services with Docker Compose. Let me know if you'd like to customize any section further!
+
+---
+
+## Terraform Configuration for EC2, RDS, Auto Scaling, and Monitoring
+
+### Overview
 
 This Terraform configuration provisions the following AWS resources:
 - **EC2 Instance**: A `t2.micro` EC2 instance with SSH and MySQL access configured.
