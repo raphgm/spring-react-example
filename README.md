@@ -132,7 +132,7 @@ Before running the application, ensure you have the following installed:
 
 The `docker-compose.yml` file is used to define and orchestrate the backend and frontend services.
 
-### Example `docker-compose.yml`
+### `docker-compose.yml`
 ```yaml
 version: "3.8"
 services:
@@ -157,8 +157,8 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: microservices
-      MYSQL_USER: user
-      MYSQL_PASSWORD: password
+      MYSQL_USER: ****
+      MYSQL_PASSWORD: ****
     ports:
       - "3306:3306"
 ```
@@ -295,45 +295,6 @@ This will remove all the resources in your AWS account as defined in the Terrafo
 This concludes the Infrastructure README, which provides an overview of the setup, usage, and resources created by the `main.tf` Terraform configuration. It also includes detailed instructions for applying and cleaning up the resources.
 ```
 
-## Guide for the dotnet project
-
-1. **Set Up Your Development Environment**
-   - Ensure you have the following installed:
-     - .NET SDK
-     - Docker
-     - Git
-
-2. **Restore the .NET Project**
-   - Open a terminal in the root directory of your project.
-   - Run the following command to restore the project dependencies:
-     ```sh
-     dotnet restore
-     ```
-
-3. **Run Unit Tests**
-   - Execute the following command to run the unit tests:
-     ```sh
-     dotnet test
-     ```
-
-4. **Publish the .NET Project**
-   - Publish the project using the release configuration:
-     ```sh
-     dotnet publish -c Release -o out
-     ```
-
-
-### CI/CD Pipeline for the dotnet task
-
-The CI/CD pipeline is defined using GitHub Actions. The pipeline includes the following stages:
-
-- `restore`: Restores the project dependencies.
-- `build`: Builds the project.
-- `test`: Runs the unit tests.
-- `publish`: Publishes the project.
-- `dockerize`: Builds and pushes the Docker image.
-
-Here's the `ci.yml` file:
 
 ## CI/CD Pipeline for spring-boot-react application
 
@@ -483,5 +444,44 @@ jobs:
         AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
         AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
 ```
+## Guide for the dotnet project
+
+1. **Set Up Your Development Environment**
+   - Ensure you have the following installed:
+     - .NET SDK
+     - Docker
+     - Git
+
+2. **Restore the .NET Project**
+   - Open a terminal in the root directory of your project.
+   - Run the following command to restore the project dependencies:
+     ```sh
+     dotnet restore
+     ```
+
+3. **Run Unit Tests**
+   - Execute the following command to run the unit tests:
+     ```sh
+     dotnet test
+     ```
+
+4. **Publish the .NET Project**
+   - Publish the project using the release configuration:
+     ```sh
+     dotnet publish -c Release -o out
+     ```
+
+
+### CI/CD Pipeline for the dotnet task
+
+The CI/CD pipeline is defined using GitHub Actions. The pipeline includes the following stages:
+
+- `restore`: Restores the project dependencies.
+- `build`: Builds the project.
+- `test`: Runs the unit tests.
+- `publish`: Publishes the project.
+- `dockerize`: Builds and pushes the Docker image.
+
+Here's the `ci.yml` file:
 
 
