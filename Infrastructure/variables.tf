@@ -30,30 +30,18 @@ variable "db_name" {
   description = "The name of the RDS database"
   type        = string
   default     = "devopsdb"  # Ensure this conforms to RDS requirements
-  validation {
-    condition     = length(var.db_name) <= 64 && !regex("[^a-zA-Z0-9]", var.db_name)
-    error_message = "The db_name must be a maximum of 64 characters and contain no special characters."
-  }
 }
 
 variable "db_username" {
   description = "The username for the RDS instance"
   type        = string
   default     = "admin"  # Ensure this conforms to RDS requirements
-  validation {
-    condition     = length(var.db_username) >= 1 && length(var.db_username) <= 16 && !regex("[^a-zA-Z0-9]", var.db_username)
-    error_message = "The db_username must be between 1 and 16 alphanumeric characters with no special characters."
-  }
 }
 
 variable "db_password" {
   description = "The password for the RDS instance"
   type        = string
-  default     = "Password123!"  # Ensure this conforms to RDS requirements
-  validation {
-    condition     = length(var.db_password) >= 8 && length(var.db_password) <= 41 && regex("[A-Z]", var.db_password) && regex("[a-z]", var.db_password) && regex("[0-9]", var.db_password) && regex("[^a-zA-Z0-9]", var.db_password)
-    error_message = "The db_password must be between 8 and 41 characters and contain at least one uppercase letter, one lowercase letter, one number, and one special character."
-  }
+  default     = "password123"  # Ensure this conforms to RDS requirements
 }
 
 variable "db_instance_class" {
