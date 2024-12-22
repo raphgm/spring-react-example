@@ -292,7 +292,7 @@ This will remove all the resources in your AWS account as defined in the Terrafo
 
 
 ```
-This README provides an overview of the Infrastructure setup, usage, and resources created by the `main.tf` Terraform configuration. It also includes instructions for applying and cleaning up the resources.
+This concludes the Infrastructure README, which provides an overview of the setup, usage, and resources created by the `main.tf` Terraform configuration. It also includes detailed instructions for applying and cleaning up the resources.
 ```
 
 ## Guide for the dotnet project
