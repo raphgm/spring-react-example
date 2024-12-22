@@ -288,6 +288,7 @@ This will remove all the resources in your AWS account as defined in the Terrafo
 
 ---
 
+<<<<<<< HEAD
 This README provides an overview of the Infrastructure setup, usage, and resources created by the `main.tf` Terraform configuration. It also includes instructions for applying and cleaning up the resources.
 
 
@@ -330,21 +331,60 @@ The CI/CD pipeline is defined using GitHub Actions. The pipeline includes the fo
 - `dockerize`: Builds and pushes the Docker image.
 
 Here's the `ci.yml` file:
+=======
+## CI/CD Pipeline for spring-boot-react application
+
+This repository includes a GitHub Actions workflow for building, testing, and deploying the application across different environments (development, staging, production).
+
+### Setting Up Secrets
+
+Add the following secrets to your GitHub repository:
+
+- `DOCKER_USERNAME`: Your Docker Hub username.
+- `DOCKER_PASSWORD`: Your Docker Hub password.
+- `AWS_ACCESS_KEY_ID`: Your AWS access key ID.
+- `AWS_SECRET_ACCESS_KEY`: Your AWS secret access key.
+
+### Running the Pipeline
+
+The pipeline is triggered on pushes and pull requests to the `main` branch. It performs the following steps:
+
+1. **Build and Test**: Builds the application using Maven and runs tests.
+2. **Docker**: Builds and pushes a Docker image to Docker Hub, tagged with the branch name.
+3. **Deploy**: Deploys the application to AWS using Terraform, across multiple environments (development, staging, production).
+
+### Environment Configuration
+
+The `main.tf` file uses the `environment` variable to configure resources for each environment. Ensure that your Terraform configuration supports environment-specific settings.
+
+### GitHub Actions Workflow
+
+The GitHub Actions workflow file is located at `.github/workflows/ci-cd.yml`. Below is an overview of the workflow:
+>>>>>>> 8f22cb3 (Resolved merge conflicts)
 
 ```yaml
 name: CI/CD Pipeline
 
 on:
   push:
+<<<<<<< HEAD
     branches: [main]
   pull_request:
     branches: [main]
+=======
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+>>>>>>> 8f22cb3 (Resolved merge conflicts)
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
+<<<<<<< HEAD
       - name: Checkout code
         uses: actions/checkout@v2
 
@@ -381,4 +421,66 @@ jobs:
           docker push ${{ secrets.DOCKER_USERNAME }}/your-app-name:latest
 
 
+=======
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Set up JDK 11
+      uses: actions/setup-java@v2
+      with:
+        java-version: '11'
+
+    - name: Build with Maven
+      run: mvn clean install
+
+    - name: Run tests
+      run: mvn test
+
+  docker:
+    runs-on: ubuntu-latest
+    needs: build
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Log in to Docker Hub
+      run: echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
+
+    - name: Build Docker image
+      run: docker build -t ${{ secrets.DOCKER_USERNAME }}/spring-boot-react-example:${{ github.ref_name }} .
+
+    - name: Push Docker image
+      run: docker push ${{ secrets.DOCKER_USERNAME }}/spring-boot-react-example:${{ github.ref_name }}
+
+  deploy:
+    runs-on: ubuntu-latest
+    needs: docker
+
+    strategy:
+      matrix:
+        environment: [development, staging, production]
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Set up Terraform
+      uses: hashicorp/setup-terraform@v1
+      with:
+        terraform_version: 1.0.0
+
+    - name: Initialize Terraform
+      run: terraform init -backend-config="path=terraform.tfstate.d/${{ matrix.environment }}/terraform.tfstate"
+
+    - name: Select Terraform workspace
+      run: terraform workspace select ${{ matrix.environment }} || terraform workspace new ${{ matrix.environment }}
+
+    - name: Apply Terraform configuration
+      run: terraform apply -var="environment=${{ matrix.environment }}" -auto-approve
+      env:
+        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+```
+>>>>>>> 8f22cb3 (Resolved merge conflicts)
 
