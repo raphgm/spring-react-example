@@ -1,6 +1,6 @@
 # Microservices Task
 
-This repository contains solutions for two DevOps-focused assignments: a Java Spring Boot React Application and a .NET Application. The objective is to enhance these applications by implementing best practices in containerization, CI/CD pipelines, and cloud integration.  
+This repository contains solutions for two DevOps-focused assignments: a Java Spring Boot React Application and a .NET Application. The objective is to enhance these applications by implementing best practices in containerization, CI/CD pipelines, and cloud integration.  This `README.md` provides clear instructions on setting up, building, and running your backend and frontend services with Docker Compose. 
 
 
 ## First Task Objective
@@ -183,12 +183,9 @@ docker-compose up
 - **Backend**: Access the API at `http://localhost:8080`.
 
 
-## Contributing
-
-Feel free to fork this repository and make your own contributions. Pull requests are welcome.
 
 
-This `README.md` provides clear instructions on setting up, building, and running your backend and frontend services with Docker Compose. Let me know if you'd like to customize any section further!
+
 
 
 
@@ -296,3 +293,246 @@ This will remove all the resources in your AWS account as defined in the Terrafo
 ---
 
 This README provides an overview of the Infrastructure setup, usage, and resources created by the `main.tf` Terraform configuration. It also includes instructions for applying and cleaning up the resources.
+
+Got it! Let's set up a GitHub Actions workflow for your CI/CD pipeline. We'll follow similar steps to what we discussed earlier, but using GitHub Actions to automate the process.
+
+### Step-by-Step Guide
+
+1. **Set Up Your Development Environment**
+   - Ensure you have the following installed:
+     - .NET SDK
+     - Docker
+     - Git
+
+2. **Restore the .NET Project**
+   - Open a terminal in the root directory of your project.
+   - Run the following command to restore the project dependencies:
+     ```sh
+     dotnet restore
+     ```
+
+3. **Run Unit Tests**
+   - Execute the following command to run the unit tests:
+     ```sh
+     dotnet test
+     ```
+
+4. **Publish the .NET Project**
+   - Publish the project using the release configuration:
+     ```sh
+     dotnet publish -c Release -o out
+     ```
+
+5. **Create a Dockerfile**
+   - In the root directory of your project, create a file named `Dockerfile` with the following contents:
+     ```dockerfile
+     FROM mcr.microsoft.com/dotnet/aspnet:6.0 AS base
+     WORKDIR /app
+     EXPOSE 80
+
+     FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
+     WORKDIR /src
+     COPY ["YourProjectName.csproj", "./"]
+     RUN dotnet restore "YourProjectName.csproj"
+     COPY . .
+     WORKDIR "/src/."
+     RUN dotnet build "YourProjectName.csproj" -c Release -o /app/build
+
+     FROM build AS publish
+     RUN dotnet publish "YourProjectName.csproj" -c Release -o /app/publish
+
+     FROM base AS final
+     WORKDIR /app
+     COPY --from=publish /app/publish .
+     ENTRYPOINT ["dotnet", "YourProjectName.dll"]
+     ```
+
+6. **Build the Docker Image**
+   - Build the Docker image using the following command:
+     ```sh
+     docker build -t your-app-name .
+     ```
+
+7. **Run the Docker Container**
+   - Run the Docker container to verify the application works correctly:
+     ```sh
+     docker run -d -p 8080:80 your-app-name
+     ```
+
+8. **Set Up GitHub Actions Workflow**
+   - In the root directory of your repository, create a folder named `.github` and inside it, create another folder named `workflows`.
+   - In the `workflows` folder, create a file named `ci.yml` with the following contents:
+
+     ```yaml
+     name: CI/CD Pipeline
+
+     on:
+       push:
+         branches: [main]
+       pull_request:
+         branches: [main]
+
+     jobs:
+       build:
+         runs-on: ubuntu-latest
+
+         steps:
+           - name: Checkout code
+             uses: actions/checkout@v2
+
+           - name: Set up .NET Core
+             uses: actions/setup-dotnet@v1
+             with:
+               dotnet-version: '6.0.x'
+
+           - name: Restore dependencies
+             run: dotnet restore
+
+           - name: Build
+             run: dotnet build --configuration Release --no-restore
+
+           - name: Run tests
+             run: dotnet test --no-restore --verbosity normal
+
+           - name: Publish
+             run: dotnet publish --configuration Release --output ./out --no-restore
+
+           - name: Set up Docker Buildx
+             uses: docker/setup-buildx-action@v1
+
+           - name: Login to DockerHub
+             uses: docker/login-action@v1
+             with:
+               username: ${{ secrets.DOCKER_USERNAME }}
+               password: ${{ secrets.DOCKER_PASSWORD }}
+
+           - name: Build and push Docker image
+             run: |
+               docker build -t your-app-name .
+               docker tag your-app-name:latest ${{ secrets.DOCKER_USERNAME }}/your-app-name:latest
+               docker push ${{ secrets.DOCKER_USERNAME }}/your-app-name:latest
+     ```
+
+### README.md
+
+Here's a sample README for your project, including the GitHub Actions setup:
+
+```markdown
+# .NET Application
+
+This repository contains a .NET application with a CI/CD pipeline setup using GitHub Actions. The application is containerized using Docker.
+
+## Prerequisites
+
+- .NET SDK
+- Docker
+- Git
+
+## Getting Started
+
+### Restore the .NET Project
+
+Restore the project dependencies using the following command:
+
+```sh
+dotnet restore
+```
+
+### Run Unit Tests
+
+Execute the unit tests using the following command:
+
+```sh
+dotnet test
+```
+
+### Publish the .NET Project
+
+Publish the project using the release configuration:
+
+```sh
+dotnet publish -c Release -o out
+```
+
+### Create a Docker Image
+
+Build the Docker image using the following command:
+
+```sh
+docker build -t your-app-name .
+```
+
+### Run the Docker Container
+
+Run the Docker container to verify the application works correctly:
+
+```sh
+docker run -d -p 8080:80 your-app-name
+```
+
+## CI/CD Pipeline
+
+The CI/CD pipeline is defined using GitHub Actions. The pipeline includes the following stages:
+
+- `restore`: Restores the project dependencies.
+- `build`: Builds the project.
+- `test`: Runs the unit tests.
+- `publish`: Publishes the project.
+- `dockerize`: Builds and pushes the Docker image.
+
+Here's the `ci.yml` file:
+
+```yaml
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up .NET Core
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: '6.0.x'
+
+      - name: Restore dependencies
+        run: dotnet restore
+
+      - name: Build
+        run: dotnet build --configuration Release --no-restore
+
+      - name: Run tests
+        run: dotnet test --no-restore --verbosity normal
+
+      - name: Publish
+        run: dotnet publish --configuration Release --output ./out --no-restore
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v1
+
+      - name: Login to DockerHub
+        uses: docker/login-action@v1
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+
+      - name: Build and push Docker image
+        run: |
+          docker build -t your-app-name .
+          docker tag your-app-name:latest ${{ secrets.DOCKER_USERNAME }}/your-app-name:latest
+          docker push ${{ secrets.DOCKER_USERNAME }}/your-app-name:latest
+
+
+
+## Contributing
+
+Feel free to fork this repository and make your own contributions. Pull requests are welcome.
