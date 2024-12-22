@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 # Microservices Task
+=======
+# Microservices-task
+>>>>>>> 973e1b7e85afeae12bafdd9efaa3c7d7b29e31f0
 
 This repository contains solutions for two DevOps-focused assignments: a Java Spring Boot React Application and a .NET Application. The objective is to enhance these applications by implementing best practices in containerization, CI/CD pipelines, and cloud integration.  This `README.md` provides clear instructions on setting up, building, and running your backend and frontend services with Docker Compose. 
 
@@ -6,6 +10,11 @@ This repository contains solutions for two DevOps-focused assignments: a Java Sp
 ## First Task Objective
 
 The first project demonstrates the separation of a codebase into backend and frontend services, containerization using Docker, and orchestration using Docker Compose.
+
+
+# Objective for the first Task 
+
+The first task demonstrates the separation of a codebase into backend and frontend services, containerization using Docker, and orchestration using Docker Compose.
 
 ## Table of Contents
 - [Overview](#overview)
@@ -185,11 +194,18 @@ docker-compose up
 
 
 
+<<<<<<< HEAD
 ## Infrastructure Configuration using Terraform for EC2, RDS, Auto Scaling, and Monitoring
+=======
+
+
+## Infrastructure using Terraform  for the Configuration for EC2, RDS, Auto Scaling, and Monitoring
+>>>>>>> 973e1b7e85afeae12bafdd9efaa3c7d7b29e31f0
 
 ### Overview
 
-This Terraform configuration provisions the following AWS resources:
+This part of the project involves Terraform configuration provisions the following AWS resources:
+
 - **EC2 Instance**: A `t2.micro` EC2 instance with SSH and MySQL access configured.
 - **RDS Instance**: A MySQL-based database instance for DevOps workloads.
 - **Auto Scaling Group**: An auto scaling group with EC2 instances that adjusts capacity based on CPU utilization.
@@ -289,6 +305,7 @@ This will remove all the resources in your AWS account as defined in the Terrafo
 ---
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 This README provides an overview of the Infrastructure setup, usage, and resources created by the `main.tf` Terraform configuration. It also includes instructions for applying and cleaning up the resources.
 
 
@@ -332,6 +349,8 @@ The CI/CD pipeline is defined using GitHub Actions. The pipeline includes the fo
 
 Here's the `ci.yml` file:
 =======
+=======
+>>>>>>> 973e1b7e85afeae12bafdd9efaa3c7d7b29e31f0
 ## CI/CD Pipeline for spring-boot-react application
 
 This repository includes a GitHub Actions workflow for building, testing, and deploying the application across different environments (development, staging, production).
@@ -360,7 +379,10 @@ The `main.tf` file uses the `environment` variable to configure resources for ea
 ### GitHub Actions Workflow
 
 The GitHub Actions workflow file is located at `.github/workflows/ci-cd.yml`. Below is an overview of the workflow:
+<<<<<<< HEAD
 >>>>>>> 8f22cb3 (Resolved merge conflicts)
+=======
+>>>>>>> 973e1b7e85afeae12bafdd9efaa3c7d7b29e31f0
 
 ```yaml
 name: CI/CD Pipeline
@@ -368,22 +390,29 @@ name: CI/CD Pipeline
 on:
   push:
 <<<<<<< HEAD
+<<<<<<< HEAD
     branches: [main]
   pull_request:
     branches: [main]
 =======
+=======
+>>>>>>> 973e1b7e85afeae12bafdd9efaa3c7d7b29e31f0
     branches:
       - main
   pull_request:
     branches:
       - main
+<<<<<<< HEAD
 >>>>>>> 8f22cb3 (Resolved merge conflicts)
+=======
+>>>>>>> 973e1b7e85afeae12bafdd9efaa3c7d7b29e31f0
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
+<<<<<<< HEAD
 <<<<<<< HEAD
       - name: Checkout code
         uses: actions/checkout@v2
@@ -422,6 +451,8 @@ jobs:
 
 
 =======
+=======
+>>>>>>> 973e1b7e85afeae12bafdd9efaa3c7d7b29e31f0
     - name: Checkout code
       uses: actions/checkout@v2
 
@@ -482,5 +513,8 @@ jobs:
         AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
         AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
 ```
+<<<<<<< HEAD
 >>>>>>> 8f22cb3 (Resolved merge conflicts)
+=======
+>>>>>>> 973e1b7e85afeae12bafdd9efaa3c7d7b29e31f0
 

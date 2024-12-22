@@ -93,7 +93,11 @@ resource "aws_instance" "devopstask_instance" {
   ami           = var.ami_id
   instance_type = var.instance_type
   key_name      = var.key_name
+<<<<<<< HEAD
   security_groups = [aws_security_group.devopssg.id]
+=======
+  security_groups = [aws_security_group.devopssg.name]
+>>>>>>> 973e1b7e85afeae12bafdd9efaa3c7d7b29e31f0
 
   tag_specifications {
     resource_type = "instance"
