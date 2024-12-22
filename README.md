@@ -185,10 +185,6 @@ docker-compose up
 
 
 
-
-
-
-
 ## Infrastructure Configuration using Terraform for EC2, RDS, Auto Scaling, and Monitoring
 
 ### Overview
@@ -295,7 +291,7 @@ This will remove all the resources in your AWS account as defined in the Terrafo
 This README provides an overview of the Infrastructure setup, usage, and resources created by the `main.tf` Terraform configuration. It also includes instructions for applying and cleaning up the resources.
 
 
-### Step-by-Step Guide
+## Guide for the dotnet project
 
 1. **Set Up Your Development Environment**
    - Ensure you have the following installed:
@@ -323,7 +319,7 @@ This README provides an overview of the Infrastructure setup, usage, and resourc
      ```
 
 
-## CI/CD Pipeline
+### CI/CD Pipeline for the dotnet task
 
 The CI/CD pipeline is defined using GitHub Actions. The pipeline includes the following stages:
 
