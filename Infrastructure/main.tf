@@ -1,3 +1,67 @@
+variable "region" {
+  description = "The AWS region to deploy resources in"
+  type        = string
+  default     = "us-east-1"
+}
+
+variable "ami_id" {
+  description = "The AMI ID for the EC2 instance"
+  type        = string
+  default     = "ami-0e1c5d8c23330dee3"  # Updated to the new AMI ID
+}
+
+variable "instance_type" {
+  description = "The instance type for the EC2 instance"
+  type        = string
+  default     = "t2.micro"
+}
+
+variable "vpc_id" {
+  description = "The VPC ID where resources will be deployed"
+  type        = string
+}
+
+variable "subnet_ids" {
+  description = "A list of subnet IDs where the Auto Scaling group will launch instances"
+  type        = list(string)
+}
+
+variable "db_name" {
+  description = "The name of the RDS database"
+  type        = string
+  default     = "devopsdb"
+}
+
+variable "db_username" {
+  description = "The username for the RDS instance"
+  type        = string
+  default     = "admin"
+}
+
+variable "db_password" {
+  description = "The password for the RDS instance"
+  type        = string
+  default     = "password123"
+}
+
+variable "db_instance_class" {
+  description = "The instance class for the RDS instance"
+  type        = string
+  default     = "db.t3.micro"
+}
+
+variable "db_allocated_storage" {
+  description = "The allocated storage for the RDS instance (in GB)"
+  type        = number
+  default     = 20
+}
+
+variable "key_name" {
+  description = "The name of the key pair to use for the EC2 instance"
+  type        = string
+  default     = "my-key-pair"
+}
+
 # Provider Configuration
 provider "aws" {
   region = var.region
@@ -29,10 +93,13 @@ resource "aws_instance" "devopstask_instance" {
   ami           = var.ami_id
   instance_type = var.instance_type
   key_name      = var.key_name
-  security_groups = [aws_security_group.devopssg.name]
+  security_groups = [aws_security_group.devopssg.id]
 
-  tags = {
-    Name = "devopstask-instance"
+  tag_specifications {
+    resource_type = "instance"
+    tags = {
+      Name = "DevOpsTaskInstance"
+    }
   }
 
   user_data = <<-EOF
@@ -44,21 +111,15 @@ resource "aws_instance" "devopstask_instance" {
 
 # RDS Instance Setup (DevOps DB)
 resource "aws_db_instance" "devopsdb" {
-  identifier           = "devopsdb-instance"
-  allocated_storage    = 20
-  engine               = "mysql"
-  engine_version       = "8.0.34"
-  instance_class       = "db.t3.micro"
-  db_name              = var.db_name
-  username             = var.db_username
-  password             = var.db_password
-  publicly_accessible  = true
-  vpc_security_group_ids = [aws_security_group.devopssg.id]
-  skip_final_snapshot  = true
-
-  tags = {
-    Name = "DevOpsDB"
-  }
+  identifier              = "devopsdb-instance"
+  allocated_storage       = var.db_allocated_storage
+  engine                  = "mysql"
+  instance_class          = var.db_instance_class
+  name                    = var.db_name
+  username                = var.db_username
+  password                = var.db_password
+  parameter_group_name    = "default.mysql8.0"
+  skip_final_snapshot     = true
 }
 
 # CloudWatch Metrics Alarm for RDS CPU
@@ -87,8 +148,8 @@ resource "aws_cloudwatch_log_group" "ec2_log_group" {
 }
 
 resource "aws_cloudwatch_log_stream" "ec2_log_stream" {
-  log_group_name = aws_cloudwatch_log_group.ec2_log_group.name
-  name           = "instance-logs"
+  name              = "instance-logs"
+  log_group_name    = aws_cloudwatch_log_group.ec2_log_group.name
 }
 
 # Launch Template
@@ -120,11 +181,11 @@ resource "aws_autoscaling_group" "devopstask_asg" {
   vpc_zone_identifier = var.subnet_ids
   min_size            = 1
   max_size            = 3
-  desired_capacity    = 2
+  desired_capacity    = 1
 
   tag {
     key                 = "Name"
-    value               = "devopstask-instance"
+    value               = "DevOpsTaskInstance"
     propagate_at_launch = true
   }
 }
