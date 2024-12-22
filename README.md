@@ -1,8 +1,5 @@
-<<<<<<< HEAD
+
 # Microservices Task
-=======
-# Microservices-task
->>>>>>> 973e1b7e85afeae12bafdd9efaa3c7d7b29e31f0
 
 This repository contains solutions for two DevOps-focused assignments: a Java Spring Boot React Application and a .NET Application. The objective is to enhance these applications by implementing best practices in containerization, CI/CD pipelines, and cloud integration.  This `README.md` provides clear instructions on setting up, building, and running your backend and frontend services with Docker Compose. 
 
@@ -11,13 +8,7 @@ This repository contains solutions for two DevOps-focused assignments: a Java Sp
 
 The first project demonstrates the separation of a codebase into backend and frontend services, containerization using Docker, and orchestration using Docker Compose.
 
-
-# Objective for the first Task 
-
-The first task demonstrates the separation of a codebase into backend and frontend services, containerization using Docker, and orchestration using Docker Compose.
-
-## Table of Contents
-- [Overview](#overview)
+## Table of Content
 - [Project Structure](#project-structure)
 - [Setup](#setup)
 - [Backend Service](#backend-service)
@@ -194,13 +185,8 @@ docker-compose up
 
 
 
-<<<<<<< HEAD
-## Infrastructure Configuration using Terraform for EC2, RDS, Auto Scaling, and Monitoring
-=======
-
-
 ## Infrastructure using Terraform  for the Configuration for EC2, RDS, Auto Scaling, and Monitoring
->>>>>>> 973e1b7e85afeae12bafdd9efaa3c7d7b29e31f0
+
 
 ### Overview
 
@@ -304,10 +290,10 @@ This will remove all the resources in your AWS account as defined in the Terrafo
 
 ---
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-This README provides an overview of the Infrastructure setup, usage, and resources created by the `main.tf` Terraform configuration. It also includes instructions for applying and cleaning up the resources.
 
+```
+This README provides an overview of the Infrastructure setup, usage, and resources created by the `main.tf` Terraform configuration. It also includes instructions for applying and cleaning up the resources.
+```
 
 ## Guide for the dotnet project
 
@@ -348,9 +334,7 @@ The CI/CD pipeline is defined using GitHub Actions. The pipeline includes the fo
 - `dockerize`: Builds and pushes the Docker image.
 
 Here's the `ci.yml` file:
-=======
-=======
->>>>>>> 973e1b7e85afeae12bafdd9efaa3c7d7b29e31f0
+
 ## CI/CD Pipeline for spring-boot-react application
 
 This repository includes a GitHub Actions workflow for building, testing, and deploying the application across different environments (development, staging, production).
@@ -379,41 +363,30 @@ The `main.tf` file uses the `environment` variable to configure resources for ea
 ### GitHub Actions Workflow
 
 The GitHub Actions workflow file is located at `.github/workflows/ci-cd.yml`. Below is an overview of the workflow:
-<<<<<<< HEAD
->>>>>>> 8f22cb3 (Resolved merge conflicts)
-=======
->>>>>>> 973e1b7e85afeae12bafdd9efaa3c7d7b29e31f0
+
 
 ```yaml
 name: CI/CD Pipeline
 
 on:
   push:
-<<<<<<< HEAD
-<<<<<<< HEAD
+
     branches: [main]
   pull_request:
     branches: [main]
-=======
-=======
->>>>>>> 973e1b7e85afeae12bafdd9efaa3c7d7b29e31f0
+
     branches:
       - main
   pull_request:
     branches:
       - main
-<<<<<<< HEAD
->>>>>>> 8f22cb3 (Resolved merge conflicts)
-=======
->>>>>>> 973e1b7e85afeae12bafdd9efaa3c7d7b29e31f0
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
-<<<<<<< HEAD
-<<<<<<< HEAD
+
       - name: Checkout code
         uses: actions/checkout@v2
 
@@ -450,9 +423,6 @@ jobs:
           docker push ${{ secrets.DOCKER_USERNAME }}/your-app-name:latest
 
 
-=======
-=======
->>>>>>> 973e1b7e85afeae12bafdd9efaa3c7d7b29e31f0
     - name: Checkout code
       uses: actions/checkout@v2
 
@@ -513,8 +483,5 @@ jobs:
         AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
         AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
 ```
-<<<<<<< HEAD
->>>>>>> 8f22cb3 (Resolved merge conflicts)
-=======
->>>>>>> 973e1b7e85afeae12bafdd9efaa3c7d7b29e31f0
+
 
