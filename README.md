@@ -187,15 +187,14 @@ docker-compose up
 Feel free to fork this repository and make your own contributions. Pull requests are welcome.
 
 
-This `README.md` provides clear instructions on setting up, building, and running your backend and frontend services with Docker Compose. Let me know if you'd like to customize any section further!
 
 
-
-## Terraform Configuration for EC2, RDS, Auto Scaling, and Monitoring
+## Infrastructure using Terraform  for the Configuration for EC2, RDS, Auto Scaling, and Monitoring
 
 ### Overview
 
-This Terraform configuration provisions the following AWS resources:
+This part of the project involves Terraform configuration provisions the following AWS resources:
+
 - **EC2 Instance**: A `t2.micro` EC2 instance with SSH and MySQL access configured.
 - **RDS Instance**: A MySQL-based database instance for DevOps workloads.
 - **Auto Scaling Group**: An auto scaling group with EC2 instances that adjusts capacity based on CPU utilization.
