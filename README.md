@@ -1,8 +1,5 @@
-<<<<<<< HEAD
+
 # Microservices Task
-=======
-# Microservices-task
->>>>>>> 973e1b7e85afeae12bafdd9efaa3c7d7b29e31f0
 
 This repository contains solutions for two DevOps-focused assignments: a Java Spring Boot React Application and a .NET Application. The objective is to enhance these applications by implementing best practices in containerization, CI/CD pipelines, and cloud integration.  This `README.md` provides clear instructions on setting up, building, and running your backend and frontend services with Docker Compose. 
 
@@ -11,13 +8,7 @@ This repository contains solutions for two DevOps-focused assignments: a Java Sp
 
 The first project demonstrates the separation of a codebase into backend and frontend services, containerization using Docker, and orchestration using Docker Compose.
 
-
-# Objective for the first Task 
-
-The first task demonstrates the separation of a codebase into backend and frontend services, containerization using Docker, and orchestration using Docker Compose.
-
-## Table of Contents
-- [Overview](#overview)
+## Table of Content
 - [Project Structure](#project-structure)
 - [Setup](#setup)
 - [Backend Service](#backend-service)
@@ -141,7 +132,7 @@ Before running the application, ensure you have the following installed:
 
 The `docker-compose.yml` file is used to define and orchestrate the backend and frontend services.
 
-### Example `docker-compose.yml`
+### `docker-compose.yml`
 ```yaml
 version: "3.8"
 services:
@@ -166,8 +157,8 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: microservices
-      MYSQL_USER: user
-      MYSQL_PASSWORD: password
+      MYSQL_USER: ****
+      MYSQL_PASSWORD: ****
     ports:
       - "3306:3306"
 ```
@@ -194,13 +185,8 @@ docker-compose up
 
 
 
-<<<<<<< HEAD
-## Infrastructure Configuration using Terraform for EC2, RDS, Auto Scaling, and Monitoring
-=======
-
-
 ## Infrastructure using Terraform  for the Configuration for EC2, RDS, Auto Scaling, and Monitoring
->>>>>>> 973e1b7e85afeae12bafdd9efaa3c7d7b29e31f0
+
 
 ### Overview
 
@@ -304,53 +290,12 @@ This will remove all the resources in your AWS account as defined in the Terrafo
 
 ---
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-This README provides an overview of the Infrastructure setup, usage, and resources created by the `main.tf` Terraform configuration. It also includes instructions for applying and cleaning up the resources.
+
+```
+This concludes the Infrastructure README, which provides an overview of the setup, usage, and resources created by the `main.tf` Terraform configuration. It also includes detailed instructions for applying and cleaning up the resources.
+```
 
 
-## Guide for the dotnet project
-
-1. **Set Up Your Development Environment**
-   - Ensure you have the following installed:
-     - .NET SDK
-     - Docker
-     - Git
-
-2. **Restore the .NET Project**
-   - Open a terminal in the root directory of your project.
-   - Run the following command to restore the project dependencies:
-     ```sh
-     dotnet restore
-     ```
-
-3. **Run Unit Tests**
-   - Execute the following command to run the unit tests:
-     ```sh
-     dotnet test
-     ```
-
-4. **Publish the .NET Project**
-   - Publish the project using the release configuration:
-     ```sh
-     dotnet publish -c Release -o out
-     ```
-
-
-### CI/CD Pipeline for the dotnet task
-
-The CI/CD pipeline is defined using GitHub Actions. The pipeline includes the following stages:
-
-- `restore`: Restores the project dependencies.
-- `build`: Builds the project.
-- `test`: Runs the unit tests.
-- `publish`: Publishes the project.
-- `dockerize`: Builds and pushes the Docker image.
-
-Here's the `ci.yml` file:
-=======
-=======
->>>>>>> 973e1b7e85afeae12bafdd9efaa3c7d7b29e31f0
 ## CI/CD Pipeline for spring-boot-react application
 
 This repository includes a GitHub Actions workflow for building, testing, and deploying the application across different environments (development, staging, production).
@@ -379,41 +324,30 @@ The `main.tf` file uses the `environment` variable to configure resources for ea
 ### GitHub Actions Workflow
 
 The GitHub Actions workflow file is located at `.github/workflows/ci-cd.yml`. Below is an overview of the workflow:
-<<<<<<< HEAD
->>>>>>> 8f22cb3 (Resolved merge conflicts)
-=======
->>>>>>> 973e1b7e85afeae12bafdd9efaa3c7d7b29e31f0
+
 
 ```yaml
 name: CI/CD Pipeline
 
 on:
   push:
-<<<<<<< HEAD
-<<<<<<< HEAD
+
     branches: [main]
   pull_request:
     branches: [main]
-=======
-=======
->>>>>>> 973e1b7e85afeae12bafdd9efaa3c7d7b29e31f0
+
     branches:
       - main
   pull_request:
     branches:
       - main
-<<<<<<< HEAD
->>>>>>> 8f22cb3 (Resolved merge conflicts)
-=======
->>>>>>> 973e1b7e85afeae12bafdd9efaa3c7d7b29e31f0
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
-<<<<<<< HEAD
-<<<<<<< HEAD
+
       - name: Checkout code
         uses: actions/checkout@v2
 
@@ -450,9 +384,6 @@ jobs:
           docker push ${{ secrets.DOCKER_USERNAME }}/your-app-name:latest
 
 
-=======
-=======
->>>>>>> 973e1b7e85afeae12bafdd9efaa3c7d7b29e31f0
     - name: Checkout code
       uses: actions/checkout@v2
 
@@ -513,8 +444,99 @@ jobs:
         AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
         AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
 ```
-<<<<<<< HEAD
->>>>>>> 8f22cb3 (Resolved merge conflicts)
-=======
->>>>>>> 973e1b7e85afeae12bafdd9efaa3c7d7b29e31f0
 
+## Documentation for the Second Task - The Dotnet Application
+
+Details for this project can be found in the main repository: [https://github.com/raphgm/dotnet-app-example](https://github.com/raphgm/dotnet-app-example). This repository, however, is primarily being used to document the overall progress and details of the project.  
+
+## Objective of the Second Task  
+
+This documentation aims to provide clear, step-by-step guidance on restoring project dependencies, running unit tests, and publishing your .NET project. The goal is to ensure the project's reliability and correctness at every stage. Additionally, it includes instructions for integrating automated testing into a CI/CD pipeline using GitHub Actions, enabling seamless validation and streamlined deployment workflows.  
+
+ **Set Up Your Development Environment**
+   
+    Ensure you have the following installed:
+     - .NET SDK
+     - Docker
+     - Git
+
+4. **Restore the .NET Project**
+   - Open a terminal in the root directory of your project.
+   - Run the following command to restore the project dependencies:
+     ```sh
+     dotnet restore
+     ```
+
+5. **Run Unit Tests**
+   - Execute the following command to run the unit tests:
+     ```sh
+     dotnet test
+     ```
+
+6. **Publish the .NET Project**
+   - Publish the project using the release configuration:
+     ```sh
+     dotnet publish -c Release -o out
+     ```
+
+
+### CI/CD Pipeline for the dotnet task
+
+The CI/CD pipeline is defined using GitHub Actions. The pipeline includes the following stages:
+
+- `restore`: Restores the project dependencies.
+- `build`: Builds the project.
+- `test`: Runs the unit tests.
+- `publish`: Publishes the project.
+- `dockerize`: Builds and pushes the Docker image.
+
+Here's the `ci.yml` file:  
+```yaml
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Set up .NET
+      uses: actions/setup-dotnet@v2
+      with:
+        dotnet-version: '7.0.x'
+
+    - name: Restore dependencies
+      run: dotnet restore
+
+    - name: Build
+      run: dotnet build --no-restore
+
+    - name: Test
+      run: dotnet test --no-build --verbosity normal
+
+    - name: Publish
+      run: dotnet publish -c Release -o out
+
+    - name: Build Docker image
+      run: docker build -t aspnet-core-dotnet-core .
+
+    - name: Push Docker image
+      env:
+        DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+        DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+      run: |
+        echo $DOCKER_PASSWORD | docker login -u $DOCKER_USERNAME --password-stdin
+        docker tag aspnet-core-dotnet-core $DOCKER_USERNAME/aspnet-core-dotnet-core:latest
+        docker push $DOCKER_USERNAME/aspnet-core-dotnet-core:latest
+```

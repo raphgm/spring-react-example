@@ -1,13 +1,13 @@
 variable "region" {
   description = "The AWS region to deploy resources in"
   type        = string
-  default     = "us-east-1"  # Change to your preferred region
+  default     = "us-east-1"
 }
 
 variable "ami_id" {
   description = "The AMI ID for the EC2 instance"
   type        = string
-  default     = "ami-01816d07b1128cd2d"  # Change to your preferred AMI ID
+  default     = "ami-0e1c5d8c23330dee3"
 }
 
 variable "instance_type" {
@@ -29,19 +29,19 @@ variable "subnet_ids" {
 variable "db_name" {
   description = "The name of the RDS database"
   type        = string
-  default     = "devopsdb"  # Ensure this conforms to RDS requirements
+  default     = "devopsdb"
 }
 
 variable "db_username" {
   description = "The username for the RDS instance"
   type        = string
-  default     = "admin"  # Ensure this conforms to RDS requirements
+  default     = "admin"
 }
 
 variable "db_password" {
   description = "The password for the RDS instance"
   type        = string
-  default     = "password123"  # Ensure this conforms to RDS requirements
+  default     = "password123"
 }
 
 variable "db_instance_class" {

@@ -7,7 +7,7 @@ variable "region" {
 variable "ami_id" {
   description = "The AMI ID for the EC2 instance"
   type        = string
-  default     = "ami-0e1c5d8c23330dee3"  # Updated to the new AMI ID
+  default     = "ami-0e1c5d8c23330dee3" # Updated to the new AMI ID
 }
 
 variable "instance_type" {
@@ -69,7 +69,7 @@ provider "aws" {
 
 # Security Group for EC2 and MySQL
 resource "aws_security_group" "devopssg" {
-  name        = "devopssg-unique"  # Changed to a unique name
+  name        = "devopssg-unique" # Changed to a unique name
   description = "Security group for devops task"
   vpc_id      = var.vpc_id
 
@@ -90,14 +90,10 @@ resource "aws_security_group" "devopssg" {
 
 # EC2 Instance Setup
 resource "aws_instance" "devopstask_instance" {
-  ami           = var.ami_id
-  instance_type = var.instance_type
-  key_name      = var.key_name
-<<<<<<< HEAD
+  ami             = var.ami_id
+  instance_type   = var.instance_type
+  key_name        = var.key_name
   security_groups = [aws_security_group.devopssg.id]
-=======
-  security_groups = [aws_security_group.devopssg.name]
->>>>>>> 973e1b7e85afeae12bafdd9efaa3c7d7b29e31f0
 
   tag_specifications {
     resource_type = "instance"
@@ -115,15 +111,15 @@ resource "aws_instance" "devopstask_instance" {
 
 # RDS Instance Setup (DevOps DB)
 resource "aws_db_instance" "devopsdb" {
-  identifier              = "devopsdb-instance"
-  allocated_storage       = var.db_allocated_storage
-  engine                  = "mysql"
-  instance_class          = var.db_instance_class
-  name                    = var.db_name
-  username                = var.db_username
-  password                = var.db_password
-  parameter_group_name    = "default.mysql8.0"
-  skip_final_snapshot     = true
+  identifier           = "devopsdb-instance"
+  allocated_storage    = var.db_allocated_storage
+  engine               = "mysql"
+  instance_class       = var.db_instance_class
+  name                 = var.db_name
+  username             = var.db_username
+  password             = var.db_password
+  parameter_group_name = "default.mysql8.0"
+  skip_final_snapshot  = true
 }
 
 # CloudWatch Metrics Alarm for RDS CPU
@@ -152,16 +148,16 @@ resource "aws_cloudwatch_log_group" "ec2_log_group" {
 }
 
 resource "aws_cloudwatch_log_stream" "ec2_log_stream" {
-  name              = "instance-logs"
-  log_group_name    = aws_cloudwatch_log_group.ec2_log_group.name
+  name           = "instance-logs"
+  log_group_name = aws_cloudwatch_log_group.ec2_log_group.name
 }
 
 # Launch Template
 resource "aws_launch_template" "devopstask_launch_template" {
-  name_prefix     = "devopstask_launch_template_"
-  image_id        = var.ami_id
-  instance_type   = var.instance_type
-  key_name        = var.key_name
+  name_prefix   = "devopstask_launch_template_"
+  image_id      = var.ami_id
+  instance_type = var.instance_type
+  key_name      = var.key_name
 
   network_interfaces {
     security_groups = [aws_security_group.devopssg.id]
@@ -196,20 +192,20 @@ resource "aws_autoscaling_group" "devopstask_asg" {
 
 # Scale out policy (increase instance count)
 resource "aws_autoscaling_policy" "scale_out_policy" {
-  name                   = "scale-out-policy"
-  scaling_adjustment     = 1  # Add 1 instance
-  adjustment_type        = "ChangeInCapacity"
-  cooldown               = 300  # Wait 5 minutes before scaling again
+  name               = "scale-out-policy"
+  scaling_adjustment = 1 # Add 1 instance
+  adjustment_type    = "ChangeInCapacity"
+  cooldown           = 300 # Wait 5 minutes before scaling again
 
   autoscaling_group_name = aws_autoscaling_group.devopstask_asg.name
 }
 
 # Scale in policy (decrease instance count)
 resource "aws_autoscaling_policy" "scale_in_policy" {
-  name                   = "scale-in-policy"
-  scaling_adjustment     = -1  # Remove 1 instance
-  adjustment_type        = "ChangeInCapacity"
-  cooldown               = 300  # Wait 5 minutes before scaling again
+  name               = "scale-in-policy"
+  scaling_adjustment = -1 # Remove 1 instance
+  adjustment_type    = "ChangeInCapacity"
+  cooldown           = 300 # Wait 5 minutes before scaling again
 
   autoscaling_group_name = aws_autoscaling_group.devopstask_asg.name
 }
@@ -229,8 +225,8 @@ resource "aws_cloudwatch_metric_alarm" "cpu_alarm" {
     InstanceId = aws_instance.devopstask_instance.id
   }
 
-  alarm_actions = [aws_autoscaling_policy.scale_out_policy.arn]  # Scaling out when alarm triggers
-  ok_actions    = [aws_autoscaling_policy.scale_in_policy.arn]   # Scaling in when CPU is back to normal
+  alarm_actions = [aws_autoscaling_policy.scale_out_policy.arn] # Scaling out when alarm triggers
+  ok_actions    = [aws_autoscaling_policy.scale_in_policy.arn]  # Scaling in when CPU is back to normal
 }
 
 # CloudWatch Dashboard
@@ -292,7 +288,7 @@ resource "aws_cloudwatch_dashboard" "ec2_dashboard" {
           ],
           "period" : 300,
           "stat" : "Average",
-          "region" : "us-east-1", // Ensure this matches your AWS region
+          "region" : "us-east-1",
           "title" : "EC2 Metrics"
         }
       },
@@ -309,7 +305,7 @@ resource "aws_cloudwatch_dashboard" "ec2_dashboard" {
           ],
           "period" : 300,
           "stat" : "Average",
-          "region" : "us-east-1", // Ensure this matches your AWS region
+          "region" : "us-east-1",
           "title" : "EC2 Network Metrics"
         }
       }
