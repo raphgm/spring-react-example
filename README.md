@@ -182,11 +182,32 @@ docker-compose up
 - **Frontend**: Navigate to `http://localhost:3000` in your browser.
 - **Backend**: Access the API at `http://localhost:8080`.
 
+# Challenges and Key Decisions: Nginx and Docker Compose
+
+During the setup of the frontend, I encountered several challenges that ultimately led to the decision to integrate **Nginx** and **Docker Compose** into the project architecture. These decisions were driven by specific requirements related to performance, scalability, and streamlined application management.
+
+## Integrating Nginx for Performance and Scalability
+
+One of the primary challenges was ensuring optimal performance and effective load balancing for the application. To address this, I chose to introduce **Nginx** as a reverse proxy. By doing so, Nginx efficiently distributes incoming traffic across multiple backend servers, significantly improving response times and reducing the likelihood of server overload. Additionally, Nginx's ability to handle static file serving means that the application server is freed from serving assets like images, stylesheets, and JavaScript files. This not only boosts performance but also enhances security by shielding the application server from direct client interactions. I figured that since Nginx also offers advanced security features such as SSL termination and HTTP security headers, It would be a good choice as it will further harden the overall infrastructure.
+
+## Why Docker Compose?
+
+The decision to use **Docker Compose** over standard Docker was made to simplify the management of the application's multi-container setup. As the project grew, the need for a streamlined method to configure, manage, and scale multiple services became apparent. Docker Compose provides a powerful solution, enabling the orchestration of services with a single `docker-compose.yml` file. 
+
+This approach allows for:
+- **Easier Configuration**: Define multiple services, networks, and volumes in one place.
+- **Simplified Orchestration**: Easily start, stop, and scale services, while managing dependencies and environment variables across containers.
+- **Improved Development Workflow**: With Docker Compose, setting up an environment becomes a one-step process, ensuring consistency across development, testing, and production environments.
+  
+Docker Compose is essential for efficiently managing dependencies between services, such as databases, caches, and the frontend application, while ensuring each service is isolated and can be scaled independently. This level of organization improves productivity and makes the system more maintainable over time.
+
+## Conclusion
+
+Incorporating **Nginx** and **Docker Compose** into the project architecture has provided several key benefits: improved performance through load balancing and static file handling, enhanced security through advanced proxy features, and simplified orchestration of multi-container applications. Together, these decisions have greatly contributed to a more efficient development process and a robust, scalable production environment.
 
 
 
 ## Infrastructure using Terraform  for the Configuration for EC2, RDS, Auto Scaling, and Monitoring
-
 
 ### Overview
 
