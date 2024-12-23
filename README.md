@@ -472,7 +472,7 @@ Details for this project can be found in the main repository: [https://github.co
 
 ## Objective of the Second Task  
 
-This documentation aims to provide clear, step-by-step guidance on restoring project dependencies, running unit tests, and publishing your .NET project. The goal is to ensure the project's reliability and correctness at every stage. Additionally, it includes instructions for integrating automated testing into a CI/CD pipeline using GitHub Actions, enabling seamless validation and streamlined deployment workflows.  
+The objective is to restore project dependencies, run unit tests, and publish the .NET project. The goal is to ensure the project's reliability and correctness at every stage. This guide provides documentation for integrating automated testing into a CI/CD pipeline using GitHub Actions, enabling seamless validation and streamlined deployment workflows.  
 
  **Set Up Your Development Environment**
    
