@@ -445,31 +445,35 @@ jobs:
         AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
 ```
 
-## Documentation for the dotnet project  
+## Documentation for the Second Task - The Dotnet Application
 
 Details for this project can be found in the main repository: [https://github.com/raphgm/dotnet-app-example](https://github.com/raphgm/dotnet-app-example). This repository, however, is primarily being used to document the overall progress and details of the project.  
 
-1. **Set Up Your Development Environment**
-2. 
-   - Ensure you have the following installed:
+## Objective of the Second Task  
+
+This documentation aims to provide clear, step-by-step guidance on restoring project dependencies, running unit tests, and publishing your .NET project. The goal is to ensure the project's reliability and correctness at every stage. Additionally, it includes instructions for integrating automated testing into a CI/CD pipeline using GitHub Actions, enabling seamless validation and streamlined deployment workflows.  
+
+ **Set Up Your Development Environment**
+   
+    Ensure you have the following installed:
      - .NET SDK
      - Docker
      - Git
 
-3. **Restore the .NET Project**
+4. **Restore the .NET Project**
    - Open a terminal in the root directory of your project.
    - Run the following command to restore the project dependencies:
      ```sh
      dotnet restore
      ```
 
-4. **Run Unit Tests**
+5. **Run Unit Tests**
    - Execute the following command to run the unit tests:
      ```sh
      dotnet test
      ```
 
-5. **Publish the .NET Project**
+6. **Publish the .NET Project**
    - Publish the project using the release configuration:
      ```sh
      dotnet publish -c Release -o out
