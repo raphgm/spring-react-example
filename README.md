@@ -539,4 +539,8 @@ jobs:
         echo $DOCKER_PASSWORD | docker login -u $DOCKER_USERNAME --password-stdin
         docker tag aspnet-core-dotnet-core $DOCKER_USERNAME/aspnet-core-dotnet-core:latest
         docker push $DOCKER_USERNAME/aspnet-core-dotnet-core:latest
+<<<<<<< HEAD
 ```
+=======
+```
+>>>>>>> 8c7f600b16c868856956f7e838aef782a7e2958e
