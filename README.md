@@ -490,6 +490,53 @@ The CI/CD pipeline is defined using GitHub Actions. The pipeline includes the fo
 - `publish`: Publishes the project.
 - `dockerize`: Builds and pushes the Docker image.
 
-Here's the `ci.yml` file:
+Here's the `ci.yml` file:  
+```yaml
+name: CI/CD Pipeline
 
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
 
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Set up .NET
+      uses: actions/setup-dotnet@v2
+      with:
+        dotnet-version: '7.0.x'
+
+    - name: Restore dependencies
+      run: dotnet restore
+
+    - name: Build
+      run: dotnet build --no-restore
+
+    - name: Test
+      run: dotnet test --no-build --verbosity normal
+
+    - name: Publish
+      run: dotnet publish -c Release -o out
+
+    - name: Build Docker image
+      run: docker build -t aspnet-core-dotnet-core .
+
+    - name: Push Docker image
+      env:
+        DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+        DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+      run: |
+        echo $DOCKER_PASSWORD | docker login -u $DOCKER_USERNAME --password-stdin
+        docker tag aspnet-core-dotnet-core $DOCKER_USERNAME/aspnet-core-dotnet-core:latest
+        docker push $DOCKER_USERNAME/aspnet-core-dotnet-core:latest
+```
