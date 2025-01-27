@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 
 # Microservices Task
 
@@ -565,3 +566,6 @@ jobs:
 =======
 ```
 >>>>>>> 8c7f600b16c868856956f7e838aef782a7e2958e
+=======
+# spring-react-example
+>>>>>>> origin/main
